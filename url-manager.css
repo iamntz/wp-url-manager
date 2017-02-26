@@ -91,6 +91,9 @@
 
 .ntz-link-search-results {
   position: relative;
+  max-width: 600px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .ntz-link-search-results .ntz-delete-link {
