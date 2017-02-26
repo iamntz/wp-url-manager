@@ -87,3 +87,21 @@
   white-space: nowrap;
   line-height: 3;
 }
+
+
+.ntz-link-search-results {
+  position: relative;
+}
+
+.ntz-link-search-results .ntz-delete-link {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform:translate(0, -50%);
+  background: rgba(255, 255, 255, 0);
+  transition:all  0.3s ease;
+  padding: 5px;
+}
+.ntz-link-search-results .ntz-delete-link:hover {
+  background: rgba(255, 255, 255, 1);
+}

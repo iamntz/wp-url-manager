@@ -59,7 +59,7 @@ add_action('wp_dashboard_setup', function () {
 function ntz_url_manager_get_formatted_hits($item)
 {
   $markup = sprintf('<span class="widefat" data-title="%s">%s</span>', esc_attr($item->title), esc_attr($item->url));
-  $markup .= sprintf('<span class="delete-link dashicons dashicons-no-alt" data-id="%d" data-title="Remove the link"></span>', $item->id);
+  $markup .= sprintf('<span class="js-ntz-delete-link dashicons dashicons-no-alt" data-id="%d" data-title="Remove the link"></span>', $item->id);
   $markup .= sprintf('<span class="copy-id dashicons dashicons-admin-links" data-title="%d Hits. Click to copy ID. CTRL+Click to copy full url" data-id="%d"></span>', $item->hits, $item->id);
 
   return sprintf('<li>%s</li>', $markup);

@@ -2,6 +2,7 @@ jQuery(document).ready(function($) {
   var wrapper = $('.ntz-link-manager-add');
   var searchBox = $('input', wrapper);
   var submit = $('button', wrapper);
+  var deletingInProgress = false;
 
   searchBox.autocomplete({
     source: function(request, response) {
@@ -12,13 +13,20 @@ jQuery(document).ready(function($) {
       }, response);
     },
     select: function(e, ui){
-      copyIdToClipboard(ui.item.id, e.ctrlKey);
+      if (!$(e.srcElement).hasClass('js-ntz-delete-link')) {
+        copyIdToClipboard(ui.item.id, e.ctrlKey);
+      }
       return false;
     },
     minLength: 3
   }).autocomplete("instance")._renderItem = function(ul, item) {
-    return $("<li>")
-      .append("<div data-id='" + item.id + "'>" + item.url + "<br><small>" + (item.title || item.url) + "</small></div>")
+    var markup = [];
+    markup.push(item.url);
+    markup.push("<br><small>" + (item.title || item.url) + "</small>");
+
+    markup.push('<span class="js-ntz-delete-link ntz-delete-link dashicons dashicons-no-alt" data-id="' + item.id + '" data-title="Remove the link"></span>');
+    return $("<li class='ntz-link-search-results'>")
+      .append("<div data-id='" + item.id + "'>" + markup.join('') + "</div>")
       .appendTo(ul);
   };
 
@@ -96,7 +104,10 @@ jQuery(document).ready(function($) {
     copyIdToClipboard($(e.currentTarget).attr('data-id'), e.ctrlKey);
   });
 
-  list.on('click', '.delete-link', function(e){
+  $(document).on('click', '.js-ntz-delete-link', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    deletingInProgress = true;
     if (window.confirm('Really, really delete?')) {
       var li = $(e.currentTarget).closest('li').addClass('to-be-deleted');
       $.post(ajaxurl, {
@@ -105,6 +116,7 @@ jQuery(document).ready(function($) {
         id: $(e.currentTarget).attr('data-id')
       }, function(){
         li.slideUp();
+        deletingInProgress = false;
       });
     }
     return false;
