@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
     minLength: 3
   }).autocomplete("instance")._renderItem = function(ul, item) {
     var markup = [];
-    markup.push(item.url);
+    markup.push("<span>" + item.url + "</span>");
     markup.push("<br><small>" + (item.title || item.url) + "</small>");
 
     markup.push('<span class="js-ntz-delete-link ntz-delete-link dashicons dashicons-no-alt" data-id="' + item.id + '" data-title="Remove the link"></span>');

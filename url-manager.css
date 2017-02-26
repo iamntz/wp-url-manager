@@ -26,7 +26,7 @@
 
 .ntz-link-manager-list li > span {  word-wrap: break-word; }
 
-.ntz-link-manager-list li .widefat { max-width: 95% }
+.ntz-link-manager-list li .widefat { max-width: 80% }
 
 .ntz-link-manager-list li [data-title]:after {
   content: attr(data-title);
@@ -94,6 +94,7 @@
   max-width: 600px;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  white-space: normal !important;
 }
 
 .ntz-link-search-results .ntz-delete-link {
