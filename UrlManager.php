@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: URL Manager
+Plugin Name: URL Manager (legacy)
 Description: Manage URLS
 Author: Ionuț Staicu
 Version: 1.0.0
