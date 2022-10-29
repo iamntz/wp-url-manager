@@ -194,12 +194,15 @@ add_action('parse_query', function () {
         return;
     }
 
-    header('Content-Type: application/json');
     global $wpdb;
 
     $vezi = (int) $_GET['get_url'];
 
     $url = ntz_url_manager_get_url_by_id($vezi);
+    
+    if(!$url){
+        return;
+    }
 
     $wpdb->update(
         "{$wpdb->prefix}url_manager",
@@ -208,6 +211,7 @@ add_action('parse_query', function () {
         ['%d'],
         ['%d']
     );
+    header('Content-Type: application/json');
 
     echo json_encode($url);
 
